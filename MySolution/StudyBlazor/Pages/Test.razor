@@ -1,4 +1,5 @@
 ﻿@page "/test"
+@using MySampleLibrary
 
 <h1>test</h1>
 
@@ -6,11 +7,58 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code {
-    private int currentCount = 0;
+<hr />
+<button class="btn btn-primary" @onclick="GetCities">Get Cities</button>
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
+
+
+@*@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
 }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>위치</th>
+                <th>크기</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var city in Cities)
+            {
+                <tr>
+                    <td>@city.Name</td>
+                    <td>@city.Location</td>
+                    <td>@city.Size</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}*@
+
+
+
+    @code {
+        private int currentCount = 0;
+
+        private void IncrementCount()
+        {
+            currentCount++;
+        }
+
+
+        public List<City> Cities { get; set; }
+        public async Task GetCities()
+        {
+            Cities = City.GetSampleCities();
+
+            foreach (var city in Cities)
+            {
+                Console.WriteLine(city.Name, city.Location, city.Size);
+            }
+        }
+
+    }

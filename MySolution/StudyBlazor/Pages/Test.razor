@@ -10,9 +10,7 @@
 <hr />
 <button class="btn btn-primary" @onclick="GetCities">Get Cities</button>
 
-
-
-@*@if (forecasts == null)
+@if (Cities == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -27,38 +25,38 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var city in Cities)
+            @foreach (var Cities in Cities)
             {
-                <tr>
-                    <td>@city.Name</td>
-                    <td>@city.Location</td>
-                    <td>@city.Size</td>
-                </tr>
+            <tr>
+                <td>@Cities.Name</td>
+                <td>@Cities.Location</td>
+                <td>@Cities.Size</td>
+            </tr>
             }
         </tbody>
     </table>
-}*@
+}
 
 
 
-    @code {
-        private int currentCount = 0;
+@code {
+    private int currentCount = 0;
 
-        private void IncrementCount()
-        {
-            currentCount++;
-        }
+    public List<City> Cities { get; set; }
 
-
-        public List<City> Cities { get; set; }
-        public async Task GetCities()
-        {
-            Cities = City.GetSampleCities();
-
-            foreach (var city in Cities)
-            {
-                Console.WriteLine(city.Name, city.Location, city.Size);
-            }
-        }
-
+    private void IncrementCount()
+    {
+        currentCount++;
     }
+
+    public async Task GetCities()
+    {
+        Cities = City.GetSampleCities();
+
+        foreach (var city in Cities)
+        {
+            Console.WriteLine(city.Name, city.Location, city.Size);
+        }
+    }
+
+}
